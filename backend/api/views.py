@@ -9,6 +9,15 @@ class UserView(generics.CreateAPIView):
     serializer_class = UserSerializer
     permission_classes = [AllowAny]
 
+    
+
+class UserDetailView(generics.ListAPIView):
+    serializer_class = UserDetailSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return CustomUser.objects.filter(username=self.request.user)
+
 
 class AddressView(generics.ListCreateAPIView):
     serializer_class = AddressSerializer

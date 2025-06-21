@@ -5,11 +5,12 @@ import Navbar from './components/Navbar'
 import Login from './pages/Login'
 import Cart from './pages/Cart'
 import Profile from './pages/Profile'
-
+import { ToastContainer, toast } from 'react-toastify';
 
 const App = () => {
   return (
     <div>
+      <ToastContainer />
       <Navbar />
       <Routes>
         <Route path='/' element={ <Home /> } />

@@ -17,6 +17,13 @@ class UserSerializer(serializers.ModelSerializer):
 
 class AddressSerializer(serializers.ModelSerializer):
     class Meta:
-        models = UserAddress
+        model = UserAddress
         fields = '__all__'
         extra_kwargs = {'user' : {'read_only': True}}
+
+class UserDetailSerializer(serializers.ModelSerializer):
+    addresses = AddressSerializer(source= 'user_name', many=True, read_only=True)
+
+    class Meta:
+        model = CustomUser
+        fields = ['id', 'username', 'email', 'addresses']

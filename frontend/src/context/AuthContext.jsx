@@ -57,11 +57,18 @@ export const AuthProvider = ({ children }) => {
     (error) => Promise.reject(error)
   );
 
+  const Logout = async () => {
+    localStorage.clear()
+setIsAuthorized(false)
+navigate('/login')
+  }
+
   const value = {
     api,
     navigate,
     isAuthorized,
     setIsAuthorized,
+    Logout,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

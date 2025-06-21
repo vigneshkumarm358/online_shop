@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { BiSolidUserDetail, BiSolidLogOut } from "react-icons/bi";
 import { FaMapLocationDot, FaBagShopping } from "react-icons/fa6";
 import UserDetails from "../components/UserDetails";
 import UserAddress from "../components/UserAddress";
 import UserOrders from "../components/UserOrders";
+import AuthContext from "../context/AuthContext";
 
 const Profile = () => {
   const [currentItem, setCurrentItem] = useState("details");
+  const { Logout } = useContext(AuthContext) 
 
   const renderComponent = () => {
     switch (currentItem) {
@@ -40,7 +42,7 @@ const Profile = () => {
           onClick={() => setCurrentItem("address")}
         >
           <FaMapLocationDot className="text-3xl" />
-          <p>Delivery Details</p>
+          <p>Add Delivery Details</p>
         </div>
         <div
           className={`flex flex-col items-center gap-1 cursor-pointer ${
@@ -51,7 +53,7 @@ const Profile = () => {
           <FaBagShopping className="text-3xl" />
           <p>My Orders</p>
         </div>
-        <div className="flex flex-col items-center gap-1 text-red-600 cursor-pointer">
+        <div onClick={Logout} className="flex flex-col items-center gap-1 text-red-600 cursor-pointer">
           <BiSolidLogOut className="text-3xl" />
           <p>User Logout</p>
         </div>
