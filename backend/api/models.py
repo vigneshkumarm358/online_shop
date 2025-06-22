@@ -32,14 +32,20 @@ class Product(models.Model):
     description = models.TextField()
     how_to_use = models.TextField()
     benifits = models.TextField()
-    price = models.IntegerField()
-    discount_price = models.IntegerField()
     top_rated = models.BooleanField(default=False)
     rating = models.FloatField()
-    quantity = models.CharField(max_length=10)
 
     def __str__(self):
-        return f'{self.title} - {self.quantity}'
+        return self.title
+
+class ProductQuantity(models.Model):
+    product = models.ForeignKey(Product, related_name='product_quantity', on_delete=models.CASCADE)
+    quantity = models.CharField(max_length=20) 
+    price = models.IntegerField()
+    discount_price = models.IntegerField(null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.product.title} - {self.quantity} - ₹{self.price}"
 
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='product_img')
